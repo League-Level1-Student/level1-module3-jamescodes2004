@@ -5,6 +5,5 @@ public class BackpackRunner {
 		Backpack b = new Backpack();
 		new Backpack().packAndCheck();
 
-		b.goToSchool();
 	}
 }
