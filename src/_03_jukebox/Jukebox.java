@@ -5,6 +5,8 @@ package _03_jukebox;
  */
 
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -12,7 +14,9 @@ import java.net.URL;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import javazoom.jl.player.advanced.AdvancedPlayer;
@@ -20,9 +24,31 @@ import javazoom.jl.player.advanced.AdvancedPlayer;
 /*   If you don't have javazoom.jar in your project, you can download it from here: http://bit.ly/javazoom
  *   Right click your project and add it as a JAR (Under Java Build Path > Libraries).*/
 
-public class Jukebox implements Runnable {
+public class Jukebox implements Runnable, MouseListener {
+JFrame frame = new JFrame();
+JPanel panel1 = new JPanel();
+JLabel label1 = loadImage("Rap.jpeg");
+JLabel label2 = loadImage("School.jpg");
+Song song1 = new Song("441392__wakkag__free-accapella-rap-i-bet-you.mp3");
+Song song2 = new Song("WeirdSong.mp3");
+
 
     public void run() {
+    	frame.setSize(600,600);
+    	frame.setVisible(true);
+    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	frame.setTitle("Jukebox");
+
+label1.addMouseListener(this);
+label2.addMouseListener(this);
+
+panel1.add(label1);
+panel1.add(label2);
+
+frame.add(panel1);
+
+
+
 
 		// 1. Find an mp3 on your computer or on the Internet.
 		// 2. Create a Song object for that mp3
@@ -44,7 +70,53 @@ public class Jukebox implements Runnable {
 		URL imageURL = getClass().getResource(fileName);
 		Icon icon = new ImageIcon(imageURL);
 		return new JLabel(icon);
+		
 	}
+
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		JLabel jukeboxClicked = (JLabel) e.getSource();
+		
+		if (jukeboxClicked == label1){
+			song1.play();
+			song2.stop();
+		}
+		if (jukeboxClicked == label2){
+			song2.play();
+			song1.stop();
+		}
+	}
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
 
