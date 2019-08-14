@@ -45,4 +45,5 @@ public String getTicketPrice() {
 		// return this.stars - compareQuantity; //ascending order
 		return compareQuantity - this.stars; // descending order
 	}
+
 }
